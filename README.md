@@ -1,0 +1,2 @@
+# mySmallProject
+Just testing

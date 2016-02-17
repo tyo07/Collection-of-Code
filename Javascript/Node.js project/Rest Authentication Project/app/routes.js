@@ -6,9 +6,12 @@ module.exports = function(app, passport) {
 	var multer   = require('multer');
 	var path     = require('path');
 	
-	
+	var express  = require('express');
+	//module.exports.userId = User._id;
 	var upload = multer({ storage : manager.storage}).single('userPhoto');
-	//var upload = new upload();
+	
+	console.log("halo"+manager.userId);
+	app.use(express.static(__dirname + '/uploads/'+ User._Id + '/'));
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================

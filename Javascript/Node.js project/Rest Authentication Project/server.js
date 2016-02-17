@@ -4,6 +4,8 @@
 // get all the tools we need
 var express  = require('express');
 var app      = express();
+
+app.use(express.static(__dirname + '/uploads'));
 var port     = process.env.PORT || 8081;
 var mongoose = require('mongoose');
 var passport = require('passport');

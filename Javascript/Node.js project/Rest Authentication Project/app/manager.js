@@ -14,10 +14,13 @@
 	  },
 	  filename: function (req, file, callback) {
 		
-		callback(null, file.fieldname + '-' + Date.now());
+		callback(null, file.fieldname + '-' + req.user._id);
 	  }
 	});
 	module.exports.storage = storage;
+	
+	
+	
 	
 	
 	

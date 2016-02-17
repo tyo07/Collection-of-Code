@@ -5,7 +5,7 @@ module.exports = function(app, passport) {
 	
 	var multer   = require('multer');
 	var path     = require('path');
-	console.log(manager.storage);
+	//console.log(manager.storage);
 	var upload = multer({ storage : manager.storage}).single('userPhoto');
 	//var upload = new upload();
     // =====================================
@@ -35,11 +35,18 @@ module.exports = function(app, passport) {
 	
 	// upload pic
 	app.post('/upload_photo',function(req,res){
+	
     upload(req,res,function(err) {
         if(err) {
             return res.end("Error uploading file.");
         }
-        res.end("File is uploaded" + Date.now());
+		else
+		{
+			User.findOne({ 'local.email' :  req.user.email. }, function(err, user) { // get user that is the same as with current email
+			
+			}
+			res.end("File is successfully uploaded"); // next feature, get the filename
+		}
 		});
 	});
 	

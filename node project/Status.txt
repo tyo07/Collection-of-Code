@@ -1,0 +1,3 @@
+static file server = provide file server with public directory using Express module
+server = just basic server things running in port
+parser = parsing text 

@@ -5,7 +5,7 @@
 	// multer
 	var storage =   multer.diskStorage({
 	  destination: function (req, file, callback) {
-		var userId = req.user._id;
+		
 		var dir =   path.join(__dirname,'../uploads/'+ req.user._id) // create custom directory for each user
 		if (!fs.existsSync(dir)){
 			fs.mkdirSync(dir);
@@ -18,8 +18,6 @@
 	  }
 	});
 	module.exports.storage = storage;
-	
-	
 	
 	
 	

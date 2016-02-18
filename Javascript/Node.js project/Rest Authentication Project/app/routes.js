@@ -10,8 +10,6 @@ module.exports = function(app, passport) {
 	//module.exports.userId = User._id;
 	var upload = multer({ storage : manager.storage}).single('userPhoto');
 	
-	console.log("halo"+manager.userId);
-	app.use(express.static(__dirname + '/uploads/'+ User._Id + '/'));
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
@@ -31,7 +29,9 @@ module.exports = function(app, passport) {
 		});	
     });
 	
-	
+	app.get('/userPhoto-'+':id', function(req, res){
+    res.sendfile(path.join(__dirname,'../uploads/'+ req.user._id +'/'+ req.user.local.picture));
+});
 	// choose pic
 	app.get('/upload',function(req,res){
       res.render(path.join(__dirname,'../views/upload_pic.ejs'),{ user : req.user });

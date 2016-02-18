@@ -5,7 +5,7 @@ module.exports = function(app, passport) {
 	
 	var multer   = require('multer');
 	var path     = require('path');
-	
+	var easyimg = require('easyimage');
 	var express  = require('express');
 	//module.exports.userId = User._id;
 	var upload = multer({ storage : manager.storage}).single('userPhoto');
@@ -29,6 +29,7 @@ module.exports = function(app, passport) {
 		});	
     });
 	
+	//display picture
 	app.get('/userPhoto-'+':id', function(req, res){
     res.sendfile(path.join(__dirname,'../uploads/'+ req.user._id +'/'+ req.user.local.picture));
 });
@@ -49,6 +50,21 @@ module.exports = function(app, passport) {
 					 $set: { 'local.picture': 'userPhoto' + '-' + req.user._id },
 				},function(err, results) {
 				});
+				//console.log(__dirname, '/../uploads/');
+				easyimg.rescrop({
+					 src: path.join(__dirname, './../uploads/'+ req.user._id +'/' +req.user.local.picture),
+					 dst:path.join(__dirname, './../uploads/'+ req.user._id + '/' +req.user.local.picture),
+					 width:200, height:200,
+					 cropwidth:128, cropheight:128,
+					 x:0, y:0
+				  }).then(
+				  function(image) {
+					 console.log('Resized and cropped: ' + image.width + ' x ' + image.height);
+				  },
+				  function (err) {
+					console.log(err);
+				  }
+				);
 				res.end("File is successfully uploaded"); // next feature, get the filename
 			}
 			});

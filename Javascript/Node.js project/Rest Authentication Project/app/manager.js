@@ -21,7 +21,23 @@
 	});
 	module.exports.storage = storage;
 	
-	
+	module.exports.fn = function fn(localPicture){
+		
+	easyimg.rescrop({
+					 src: localPicture,
+					 dst: localPicture,
+					 width:200, height:200,
+					 cropwidth:128, cropheight:128,
+					 x:0, y:0
+				  }).then(
+				  function(image) {
+					 console.log('Resized and cropped: ' + image.width + ' x ' + image.height);
+				  },
+				  function (err) {
+					console.log(err);
+				  }
+				);			
+	}
 	
 	
 	

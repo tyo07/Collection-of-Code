@@ -54,21 +54,8 @@ module.exports = function(app, passport) {
 					//callback();
 				});
 				
-				var localPicture = path.join(__dirname, './../uploads/'+ req.user._id +'/','userPhoto' + '-' + req.user._id);
-				easyimg.rescrop({
-					 src: localPicture,
-					 dst: localPicture,
-					 width:200, height:200,
-					 cropwidth:128, cropheight:128,
-					 x:0, y:0
-				  }).then(
-				  function(image) {
-					 console.log('Resized and cropped: ' + image.width + ' x ' + image.height);
-				  },
-				  function (err) {
-					console.log(err);
-				  }
-				);				
+				var localPicture = path.join(__dirname, './../uploads/'+ req.user._id +'/','userPhoto' + '-' + req.user._id); // intinya sih ini untuk ngambil picture di foder upload untuk diconvert
+				manager.fn(localPicture);	
 				console.log("TEST:"+req.user.local.picture);
 				
 				res.end("File is successfully uploaded"); // next feature, get the filename

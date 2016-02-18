@@ -2,6 +2,8 @@
 	var multer   = require('multer');
 	const fs = require('fs');
 	var path     = require('path');
+	
+	var easyimg = require('easyimage');
 	// multer
 	var storage =   multer.diskStorage({
 	  destination: function (req, file, callback) {
@@ -18,6 +20,9 @@
 	  }
 	});
 	module.exports.storage = storage;
+	
+	
+	
 	
 	
 	

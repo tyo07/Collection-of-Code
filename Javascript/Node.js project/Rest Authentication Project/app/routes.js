@@ -7,6 +7,8 @@ module.exports = function(app, passport) {
 	var path     = require('path');
 	var easyimg = require('easyimage');
 	var express  = require('express');
+	
+	var fs = require('fs');
 	//module.exports.userId = User._id;
 	var upload = multer({ storage : manager.storage}).single('userPhoto');
 	
@@ -30,7 +32,7 @@ module.exports = function(app, passport) {
     });
 	
 	app.get('/userPhoto-'+':id', function(req, res){
-    res.sendfile(path.join(__dirname,'../uploads/'+ req.user._id +'/'+ req.user.local.picture));
+    res.sendFile(path.join(__dirname,'../uploads/'+ req.user._id +'/'+ req.user.local.picture));
 	});
 	// choose pic
 	app.get('/upload',function(req,res){
@@ -47,16 +49,19 @@ module.exports = function(app, passport) {
 			{
 				
 				User.update({ "local.email" :  req.user.local.email }, {
-					  $set: { "local.picture": 'userPhoto' + '-' + req.user._id },
+					  $set: { "local.picture": 'userPhoto' + '-' + req.user._id + '-resized.jpg' },
 				
 				},function(err, results) {
 					console.log(results);
 					//callback();
 				});
 				
-				var localPicture = path.join(__dirname, './../uploads/'+ req.user._id +'/','userPhoto' + '-' + req.user._id); // intinya sih ini untuk ngambil picture di foder upload untuk diconvert
-				manager.fn(localPicture);	
-				console.log("TEST:"+req.user.local.picture);
+				var ConvertUploadedPicture = path.join(__dirname, './../uploads/'+ req.user._id +'/','userPhoto' + '-' + req.user._id); // intinya sih ini untuk ngambil picture di foder upload untuk diconvert
+				manager.resize(ConvertUploadedPicture);
+				//manager.rename(uploadedPicture);	
+				
+				
+				
 				
 				res.end("File is successfully uploaded"); // next feature, get the filename
 			}

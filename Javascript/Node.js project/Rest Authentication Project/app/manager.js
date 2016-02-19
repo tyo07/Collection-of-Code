@@ -21,11 +21,11 @@
 	});
 	module.exports.storage = storage;
 	
-	module.exports.fn = function fn(localPicture){
+	module.exports.resize = function fn(localPicture){
 		
 	easyimg.rescrop({
 					 src: localPicture,
-					 dst: localPicture,
+					 dst: localPicture + '-resized.jpg',
 					 width:200, height:200,
 					 cropwidth:128, cropheight:128,
 					 x:0, y:0
@@ -39,7 +39,13 @@
 				);			
 	}
 	
-	
+	module.exports.rename = function fn(uploadedPicture){
+				fs.rename(uploadedPicture, uploadedPicture+'-old', function(err) {
+					if ( err ) console.log('ERROR: ' + err);
+				});
+				
+			
+	}
 	
 	
 	

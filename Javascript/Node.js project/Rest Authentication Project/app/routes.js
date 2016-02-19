@@ -58,11 +58,6 @@ module.exports = function(app, passport) {
 				
 				var ConvertUploadedPicture = path.join(__dirname, './../uploads/'+ req.user._id +'/','userPhoto' + '-' + req.user._id); // intinya sih ini untuk ngambil picture di foder upload untuk diconvert
 				manager.resize(ConvertUploadedPicture);
-				//manager.rename(uploadedPicture);	
-				
-				
-				
-				
 				res.end("File is successfully uploaded"); // next feature, get the filename
 			}
 			});

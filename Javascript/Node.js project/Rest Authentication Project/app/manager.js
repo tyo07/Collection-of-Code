@@ -31,24 +31,15 @@
 					 x:0, y:0
 				  }).then(
 				  function(image) {
-					 console.log('Resized and cropped: ' + image.width + ' x ' + image.height);
+					  console.log('Resized and cropped: ' + image.width + ' x ' + image.height); 
+					  var deleteFilePath = localPicture; //setelah di crop di delete file yg lamanya
+					  fs.unlinkSync(deleteFilePath);	
 				  },
 				  function (err) {
 					console.log(err);
 				  }
-				);			
+				);		
+
+	
 	}
-	
-	module.exports.rename = function fn(uploadedPicture){
-				fs.rename(uploadedPicture, uploadedPicture+'-old', function(err) {
-					if ( err ) console.log('ERROR: ' + err);
-				});
-				
-			
-	}
-	
-	
-	
-	
-	
 	
